@@ -11,7 +11,7 @@ service:
   port: 5432
 
 persistence:
-  enabled: true
+  enabled: false
   accessMode: ReadWriteOnce
   mountPath: var/lib/postgresql-persist
   size: 10Gi

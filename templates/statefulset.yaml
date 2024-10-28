@@ -37,13 +37,18 @@ spec:
               value: "{{ .Values.postgresqlPassword }}"
             - name: POSTGRES_DB
               value: "{{ .Values.postgresqlDatabase }}"
+          {{- if .Values.persistence.enabled }}
           volumeMounts:
             - name: postgresql-storage
               mountPath: "{{ .Values.persistence.mountPath }}"
+          {{- end }}
+      {{- if .Values.persistence.enabled }}
       volumes:
         - name: postgresql-storage
           persistentVolumeClaim:
             claimName: {{ include "postgresql-helm.fullname" . }}-pvc
+      {{- end }}
+  {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
     - metadata:
         name: postgresql-storage
@@ -55,3 +60,4 @@ spec:
         resources:
           requests:
             storage: "{{ .Values.persistence.size }}"
+  {{- end }}
