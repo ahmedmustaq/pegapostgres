@@ -3,7 +3,7 @@ postgres:
   name: postgres
 image:
   repository: raziqts/pegadb
-  tag: "11"
+  tag: "latest"
   pullPolicy: IfNotPresent
 
 service:
